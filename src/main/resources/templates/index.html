@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/book/getBookInfo">查询所有书</a>
+<a href="/user/toLogin">用户登录</a>
+<a href="/user/logout">退出登录</a>
+<table>
+    <tr>
+        <td>编号</td>
+        <td>名称</td>
+        <td>库存</td>
+        <td>价格</td>
+    </tr>
+    <tr th:each="book,index:${books}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${book.bookName}"></td>
+        <td th:text="${book.bookStore}"></td>
+        <td th:text="${book.bookPrice}"></td>
+        <td><a shiro:hasPermission="add" href="/book/addBook">增加</a></td>
+        <!--<a shiro:hasPermission="book:add" href="/book/addBook">增加</a>-->
+        <td><a shiro:hasPermission="book:deleteInfo" th:href="@{'/book/delete?bookId='+${book.bookId}}">删除</a></td>
+        <td><a shiro:hasPermission="book:update" th:href="@{'/book/update?bookId='+${book.bookId}}">修改</a></td>
+    </tr>
+</table>
+<div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        文件名：<input type="file" name="uploadFile">
+        <button type="submit">上传</button>
+    </form>
+</div>
+</body>
+</html>

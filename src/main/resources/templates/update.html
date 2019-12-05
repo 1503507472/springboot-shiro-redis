@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr th:each="book,index:${books}">
+        <form action="/book/up">
+            id:<input type="text" name="bookId" th:value="${book.bookId}" readonly="readonly">
+            名称:<input type="text" name="bookName" th:value="${book.bookName}"><br>
+            库存:<input type="text" name="bookStore" th:value="${book.bookStore}"><br>
+            价格:<input type="text" name="bookPrice" th:value="${book.bookPrice}"><br>
+            <button type="submit">提交</button>
+        </form>
+    </tr>
+</table>
+</body>
+</html>
